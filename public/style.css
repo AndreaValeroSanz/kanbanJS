@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "GlacialIndifference";
+  src: url("/Fuentes/Glacial.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --blue: #2589bd;
+  --lightblue: #92c4de;
+  --yellow: #f5bb00;
+  --lightyellow: #fadd80;
+  --green: #4da167;
+  --lightgreen: #a6d0b3;
+  --pink: #db3069;
+  --lightpink: #ed98b4;
+  --black: #0e0e0e;
+  --white: #fafafa;
+  --gris: #dbdbdb;
+}
+
+* {
+  background-color: var(--white);
+  font-family: "GlacialIndifference", sans-serif;
+}
+
+.bg-gray {
+  background-color: var(--gris) !important;
+}
+
+.menu {
+  height: 50vh;
+}
+
+.topbar {
+  padding-top: 2vh;
+  height: 7vh;
+  border-bottom: 1px solid var(--gris);
+}
+
+.BorderRight {
+  border-right: 1px solid var(--gris);
+}
+
+.NavItems {
+  display: flex;
+  gap: 16px;
+  text-align: baseline;
+  color: #787486;
+}
+
+.NavItems:hover {
+  color: var(--black);
+  fill: var(--black);
+}
+
+.list-unstyled {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.button-container {
+  position: relative;
+}
+
+.button-container i {
+  font-size: 12px;
+}
+
+.button-container li {
+  width: 100%;
+}
+.btn.boton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.boton::after {
+  content: "\F5D4";
+  font-family: bootstrap-icons!important;
+  display: block;
+  position: absolute;
+  right: 0;
+  opacity: .1;
+  transition: opacity 0.3s;
+  
+}
+
+.boton:hover::after {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+li {
+  list-style-type: none;
+}
