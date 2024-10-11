@@ -22,6 +22,7 @@
 * {
   background-color: var(--white);
   font-family: "GlacialIndifference", sans-serif;
+  overflow: hidden;
 }
 
 .bg-gray {
@@ -40,6 +41,10 @@
 
 .BorderRight {
   border-right: 1px solid var(--gris);
+}
+.myprojects {
+  border-right: 1px solid var(--gris);
+  min-height: 100vh;
 }
 
 .NavItems {
