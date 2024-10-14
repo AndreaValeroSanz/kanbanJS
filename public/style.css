@@ -85,13 +85,12 @@
 
 .boton::after {
   content: "\F5D4";
-  font-family: bootstrap-icons!important;
+  font-family: bootstrap-icons !important;
   display: block;
   position: absolute;
   right: 0;
-  opacity: .1;
+  opacity: 0.1;
   transition: opacity 0.3s;
-  
 }
 
 .boton:hover::after {
@@ -126,4 +125,16 @@ li {
 
 .task-column hr {
   border-top: 2px solid #dbdbdb;
+}
+
+.btn-new-task {
+  color: #5030e5;
+}
+.btn-new-task:hover {
+  color: black;
+}
+
+.taskIcon {
+  width: 40px;
+  height: 40px;
 }
