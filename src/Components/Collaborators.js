@@ -32,8 +32,9 @@ class Collaborators extends HTMLElement {
             justify-content: center;
             align-items: center;
           }
-          .btn-group .btn i {
-            font-size: 40px;
+          .btn-group .btn img {
+            border-radius: 50%;
+            border: 2px solid #fafafa;
           }
           h1 {
             margin: 0;
@@ -42,6 +43,7 @@ class Collaborators extends HTMLElement {
             margin-bottom: 5px;
             font-size: 14px;
           }
+          
         </style>
   
         <div>
@@ -50,19 +52,20 @@ class Collaborators extends HTMLElement {
            
               <div class="btn-group" role="group" aria-label="Collaborators icons">
                 <button type="button" class="btn btn-outline-primary">
-                  <i class="bi bi-person-circle"></i>
+                  <img src="https://placehold.co/40x40"></img>
+                </button>
+
+                <button type="button" class="btn btn-outline-primary">
+                   <img src="https://placehold.co/40x40"></img>
                 </button>
                 <button type="button" class="btn btn-outline-primary">
-                  <i class="bi bi-person-circle"></i>
+                   <img src="https://placehold.co/40x40"></img>
                 </button>
                 <button type="button" class="btn btn-outline-primary">
-                  <i class="bi bi-person-circle"></i>
+                   <img src="https://placehold.co/40x40"></img>
                 </button>
                 <button type="button" class="btn btn-outline-primary">
-                  <i class="bi bi-person-circle"></i>
-                </button>
-                <button type="button" class="btn btn-outline-primary">
-                  <i class="bi bi-person-circle"></i>
+                   <img src="https://placehold.co/40x40"></img>
                 </button>
               </div>
             </div>

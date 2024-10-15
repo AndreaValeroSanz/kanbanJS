@@ -1,10 +1,15 @@
 class Header extends HTMLElement {
-    constructor() {
-      super();
-    }
-  
-    connectedCallback() {
-      this.innerHTML = `
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+      <style>
+          .divcolaborator-section {
+            width: 50vh;
+          }
+      </style>
         <div>
           <div class="row pt-5">
             <div class="col-lg-2">
@@ -13,7 +18,7 @@ class Header extends HTMLElement {
               </div>
             </div>
             <div class="col-lg-10 d-flex justify-content-end">
-              invite
+              <my-collaborators class="divcolaborator-section"></my-collaborators> 
             </div>
           </div>
   
@@ -51,8 +56,7 @@ class Header extends HTMLElement {
             </div>
           </div>
         </div>`;
-    }
   }
-  
-  customElements.define("my-header", Header);
-  
+}
+
+customElements.define("my-header", Header);
