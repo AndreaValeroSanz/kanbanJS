@@ -20,15 +20,13 @@ class TaskColumn extends HTMLElement {
             background-color: #F8F8F8;
             border-radius: 8px;
             padding: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
             width: 200px;
             min-height: 300px;
             height:90vh;
-            -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             border: 1px solid #dbdbdb;
+            box-shadow: -11px 13px 5px 0px rgba(158,158,158,0.56);
         }
-            .task-icon-new-task {
+        .task-icon-new-task {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -83,9 +81,9 @@ class TaskColumn extends HTMLElement {
 
         <h2>${title}</h2>
         <hr>
-      </div>
+        </div>
       <div>
-        <div class="task-item"></div>
+        <div class="task-item"></div>      
       </div>
     `;
   }
