@@ -16,6 +16,12 @@ class TaskColumn extends HTMLElement {
   render(title, taskIcon) {
     this.shadowRoot.innerHTML = `
       <style>
+
+        :host {
+        border-radius: 8px;
+        box-shadow: -15px 15px 0px 0px rgba(219,219,219,1);
+        }
+
         .task-column {
             background-color: #F8F8F8;
             border-radius: 8px;
@@ -24,7 +30,6 @@ class TaskColumn extends HTMLElement {
             min-height: 300px;
             height:90vh;
             border: 1px solid #dbdbdb;
-            box-shadow: -11px 13px 5px 0px rgba(158,158,158,0.56);
         }
         .task-icon-new-task {
             display: flex;
@@ -65,11 +70,10 @@ class TaskColumn extends HTMLElement {
 
         <div class="task-icon-new-task"> 
           <div class="icon-container">
-          ${
-            taskIcon
-              ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>`
-              : ""
-          }
+          ${taskIcon
+        ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>`
+        : ""
+      }
            </div>
             <button type="button" class="btn-new-task">
            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" style="color: #5030e5" viewBox="0 0 32 32">
