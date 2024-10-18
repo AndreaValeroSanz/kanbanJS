@@ -7,7 +7,7 @@ class AddTask extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >icono mas</button>
+       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >icono mas</button>
   
     
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
@@ -35,7 +35,7 @@ class AddTask extends HTMLElement {
               </div>
               <style> .row: after{content:""; display: table; clear: both;}</style>
               <div class="row"> <style>.column{ float: left; width: 50%;}</style>
-                <div class="column" >   
+                <div class="col" >   
                   <p>Select workarea </p>  
                       <div class="form-check">
                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -62,15 +62,23 @@ class AddTask extends HTMLElement {
                     </label>                  
                   </div>          
                 </div>
-                <div class="column" >      
+                <div class="col " style="height: 200px;">      
                   <p>Assigned Task Collaborators </p> 
-                  <i class="bi bi-person-circle"></i><button type="button" class="btn btn-primary btn-sm">add</button>
+                  <div class="col " style="height: 80px;">
+                  <div class="d-flex justify-content-around"><i class="bi bi-person-circle"></i> <p>User1 </p><button type="button"   class="btn btn-primary btn-sm">add</button>
+                  </div>
                   
-                  <i class="bi bi-person-circle"></i><button type="button" class="btn btn-primary btn-sm">add</button>
-                  <i class="bi bi-person-circle"></i><button type="button" class="btn btn-primary btn-sm">add</button>
-             
+                  <div class="d-flex justify-content-around"><i class="bi bi-person-circle"></i> <p>User2 </p><button type="button"   class="btn btn-primary btn-sm">add</button>
+                  </div>
+                  <div class="d-flex justify-content-around"><i class="bi bi-person-circle"></i> <p>User3 </p><button type="button"   class="btn btn-primary btn-sm">add</button>
+                  </div>
+                  <div class=" d-flex justify-content-end">
+                  <button type="button" class="btn btn-link">add more...</button>  
+                  </div>
+                  </div>
 
-                  <button type="button" class="btn btn-link">add more...</button>       
+             
+                     
                 </div>
               </div>
             </form>
