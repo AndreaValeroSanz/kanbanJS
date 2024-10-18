@@ -51,7 +51,7 @@ class AddTask extends HTMLElement {
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Create task</button>
+              <button type="button" class="btn btn-primary" id="save-task">Create task</button>
             </div>
           </div>
         </div>

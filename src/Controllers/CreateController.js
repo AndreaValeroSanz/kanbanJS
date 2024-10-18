@@ -17,8 +17,8 @@ function CreateTask() {
 
   // Create the task key and description
   const key = `task-${id}`;
-  const taskName = "Cards";
-  const taskDescription = "Hacer las cards";
+  const taskName = document.getElementById("task-title").value;
+  const taskDescription = document.getElementById('task-desc').value;
   const postItColour = "rgb(255, 255, 255)";
   const description = `Descripcion;${taskDescription} Id;${id} Nombre;${taskName} PostItColour;${postItColour}`;
 
@@ -31,7 +31,7 @@ function CreateTask() {
 
   // Get the element that should trigger the CreateTask function
 
-  const taskColumn = document.querySelector('task-column[title="Done"]');
+  const taskColumn = document.getElementById('save-task');
   taskColumn.addEventListener('click', CreateTask);
   
   // Attach the event listener to the element
