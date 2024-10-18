@@ -7,7 +7,6 @@ class TaskSticker extends HTMLElement{
         const description = this.getAttribute('description')|| "Please, remember to write a task description.";
         const postItColour  = this.getAttribute('postItColour');
         const dueDate = this.getAttribute('dueDate')|| "No date assigned.";
-
         this.render(title, description, postItColour);
         this.addEventListener();
     }
