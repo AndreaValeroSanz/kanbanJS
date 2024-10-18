@@ -60,7 +60,7 @@ class TaskSticker extends HTMLElement{
         const modal = this.querySelector(".modal");
         const closeButton = this.querySelector(".modal-close");
         const deleteButton = this.querySelector(".delete-task");
-        cosnt shareButton = this.querySelector(".share-task");
+        const shareButton = this.querySelector(".share-task");
         const archiveButton = this.querySelector(".archive-task");
 
         //abrir y cerrar el modal. 
