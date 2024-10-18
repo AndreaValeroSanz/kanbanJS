@@ -40,14 +40,19 @@
         </div>
 
         <div class="py-3 col-lg-10">
-          <my-header></my-header>         
+          <my-header></my-header>  
+
+          <div id="sticker">
+
+          </div>
           
           <div class="row pt-5">
             <div class="task-board d-flex justify-content-around">
               <task-column
                 title="On hold"
                 taskIcon="./public/Assets/iconosTaskColumns/On_hold.svg"
-              ></task-column>
+              >
+            </task-column>
               <task-column
                 title="Not Started"
                 taskIcon="./public/Assets/iconosTaskColumns/Not_started.svg"
@@ -70,6 +75,7 @@
       </div>
     </div>
 
+    <script type="module" src="/src/Controllers/FetchCard.js"></script>
     <script type="module" src="/src/Components/TaskColumn.js"></script>
     <script type="module" src="/src/Components/HeaderDashboard.js"></script>
     <script type="module" src="/src/Components/Navigation.js"></script>
