@@ -62,25 +62,26 @@ class TaskSticker extends HTMLElement {
     }
 </style>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card card-margin background-${postItColour}">
-                <div class="card-header no-border">
-                    <h5 class="card-title bg-transparent">${title}</h5>
-                </div>
-                <div class="card-body d-flex pt-0 background-${postItColour}">
-                    <div class="bg-transparent">
-                        <div class=" background-${postItColour}">
-                            <div class="bg-transparent">
-                                <span class="background-${postItColour}">${dueDate}</span>
-                            </div>
+<div class="container ">
+    <div class="row  ">
+        <div class="col-lg-4  g-0">
+            <div class="card card-margin  background-${postItColour}">
+                <div class="card-header no-border ">
+                   </div>
+                <div class="card-body d-flex pt-0 g-0 p-0 mx-2 row background-${postItColour}">
+                  <h5 class="card-title bg-transparent text-center">${title}</h5>
+                               
+                                  <div class="bg-transparent d-flex align-item-end">
+                                <span class=" d-flex align-self-end background-${postItColour}">${dueDate}</span>
+                          
                         </div>
-                        <div class="bg-transparent d-flex justify-content-end">
+                </div>
+                    <div class="d-flex justify-content-end aling-self-end bg-transparent">
+                        <div class="bg-transparent d-flex justify-content-end"> 
                             <a href="#" class="btn btn-sm btn-flash-border-primary background-${postItColour}">View All</a>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
     </div>
