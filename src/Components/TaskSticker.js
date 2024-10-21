@@ -14,45 +14,78 @@ class TaskSticker extends HTMLElement {
 
   render(title, description, postItColour, dueDate) {
     this.innerHTML = `
-      <!-- Post-it structure using Bootstrap -->
-      <div class="post-it card text-dark shadow-sm mb-2" style="background-color: ${postItColour};">
-        <div class="card-body p-2">
-          <!-- Only the title will be visible on the board -->
-          <h5 class="card-title m-0">${title}</h5>
+<style>
+    .card-margin {
+        margin-bottom: 1.875rem;
+    }
+
+    .card {
+        border: 0;
+        box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+        -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-clip: border-box;
+        border: 1px solid #e6e4e9;
+        border-radius: 8px;
+        width: 20vh;
+        height: 20vh;
+    }
+
+    .card .card-header.no-border {
+        border: 0;
+    }
+
+    .card .card-header {
+        background: none;
+        padding: 0 0.9375rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        min-height: 50px;
+    }
+
+    .card-header:first-child {
+        border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+    }
+      
+    .background-yellow {
+      background-color: #fadd80;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-margin background-${postItColour}">
+                <div class="card-header no-border">
+                    <h5 class="card-title bg-transparent">${title}</h5>
+                </div>
+                <div class="card-body d-flex pt-0 background-${postItColour}">
+                    <div class="bg-transparent">
+                        <div class=" background-${postItColour}">
+                            <div class="bg-transparent">
+                                <span class="background-${postItColour}">${dueDate}</span>
+                            </div>
+                        </div>
+                        <div class="bg-transparent d-flex justify-content-end">
+                            <a href="#" class="btn btn-sm btn-flash-border-primary background-${postItColour}">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  
-      <!-- Bootstrap Modal Structure -->
-      <div class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="background-color: ${postItColour};">
-            <div class="modal-header">
-              <h5 class="modal-title font-weight-bold">${title}</h5>
-              <button type="button" class="close modal-close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>${description}</p>
-              <p><strong>Date due:</strong> ${dueDate}</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <div>
-                <button type="button" class="btn btn-light delete-task">
-                  <i class="bi bi-trash"></i> Delete
-                </button>
-                <button type="button" class="btn btn-light share-task">
-                  <i class="bi bi-share"></i> Share
-                </button>
-                <button type="button" class="btn btn-light archive-task">
-                  <i class="bi bi-archive"></i> Archive
-                </button>
-              </div>
-              <button type="button" class="btn btn-secondary modal-close">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+</div>
+
     `;
   }
 
