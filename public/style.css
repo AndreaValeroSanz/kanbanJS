@@ -146,3 +146,8 @@ li {
   width: 200px;
   min-height: 300px;
 }
+
+.drag{
+  cursor: pointer;
+  z-index: 10;
+}
