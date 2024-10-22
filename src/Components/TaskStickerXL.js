@@ -79,8 +79,8 @@ class TaskStickerXL extends HTMLElement {
           <div class="col-lg-4 g-0">
               <div class="card card-margin background-${postItColour}">
                   <div class="card-header no-border pt-4 d-flex justify-content-center position relative">
-                  <div class="position-absolute top-0 end-0 ">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <div class="position-absolute top-0 end-0 background-${postItColour} ">
+                                    <svg class= "background-${postItColour}" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 5L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M19 19L5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -90,7 +90,7 @@ class TaskStickerXL extends HTMLElement {
                   </div>
                   <div class="card-body d-flex pt-0 g-0 p-0 mx-2  background-${postItColour}">
                       
-                      <div class="background-${postItColour}">
+                      <div class="background-${postItColour} ">
                           <div class=" background-${postItColour}">
                               <div class=" d-flex align-items-center mx-1  background-${postItColour}" >
                                     <div class="background-${postItColour}" >
@@ -109,11 +109,11 @@ class TaskStickerXL extends HTMLElement {
                         </ol>
                       </div>
                   </div>
-                    <div class="modal-footer background-${postItColour}d-flex justify-content-between">
+                    <div class="modal-footer background-${postItColour} d-flex justify-content-between">
 
-                    <div class="acciones_usuario">
-                            <div>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="acciones_usuario d-flex align-items-center background-${postItColour} px-4">
+                            <div class=" background-${postItColour}">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg "class=" background-${postItColour}">
                             <path d="M5.47058 6.01471V18.5294C5.47058 19.251 5.75721 19.943 6.26742 20.4532C6.77763 20.9634 7.46962 21.25 8.19117 21.25H15.8088C16.5304 21.25 17.2224 20.9634 17.7326 20.4532C18.2428 19.943 18.5294 19.251 18.5294 18.5294V6.01471" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M3.29413 6.01471H20.7059" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8.73529 6.01471V4.38235C8.73529 3.94943 8.90727 3.53423 9.2134 3.2281C9.51952 2.92198 9.93472 2.75 10.3676 2.75H13.6323C14.0653 2.75 14.4805 2.92198 14.7866 3.2281C15.0927 3.53423 15.2647 3.94943 15.2647 4.38235V6.01471" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -123,8 +123,8 @@ class TaskStickerXL extends HTMLElement {
 
                                 <button type="button" class="btn btn-sm btn-flash-border-primary background-${postItColour}" data-bs-dismiss="modal">Delete</button>
                             </div>
-                            <div>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class=" background-${postItColour}">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=" background-${postItColour}">
                             <path d="M6.01472 15.8088C7.81776 15.8088 9.27942 14.3472 9.27942 12.5441C9.27942 10.7411 7.81776 9.27942 6.01472 9.27942C4.21167 9.27942 2.75001 10.7411 2.75001 12.5441C2.75001 14.3472 4.21167 15.8088 6.01472 15.8088Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M17.9853 9.27941C19.7883 9.27941 21.25 7.81775 21.25 6.01471C21.25 4.21166 19.7883 2.75 17.9853 2.75C16.1822 2.75 14.7206 4.21166 14.7206 6.01471C14.7206 7.81775 16.1822 9.27941 17.9853 9.27941Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M17.9853 21.25C19.7883 21.25 21.25 19.7883 21.25 17.9853C21.25 16.1822 19.7883 14.7206 17.9853 14.7206C16.1822 14.7206 14.7206 16.1822 14.7206 17.9853C14.7206 19.7883 16.1822 21.25 17.9853 21.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -134,8 +134,8 @@ class TaskStickerXL extends HTMLElement {
 
                                 <button type="button" class="btn btn-sm btn-flash-border-primary background-${postItColour}" data-bs-dismiss="modal">Share</button>
                             </div>
-                            <div>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class=" background-${postItColour}">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=" background-${postItColour}">
                             <path d="M4.38232 8.8125V17.3125C4.38232 18.1579 4.72628 18.9686 5.33853 19.5664C5.95079 20.1642 6.78118 20.5 7.64703 20.5H16.3529C17.2188 20.5 18.0492 20.1642 18.6614 19.5664C19.2737 18.9686 19.6176 18.1579 19.6176 17.3125V8.8125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M19.6176 3.5H4.38235C3.48083 3.5 2.75 4.21355 2.75 5.09375V7.21875C2.75 8.09895 3.48083 8.8125 4.38235 8.8125H19.6176C20.5192 8.8125 21.25 8.09895 21.25 7.21875V5.09375C21.25 4.21355 20.5192 3.5 19.6176 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12.0001 17L12.0001 12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
@@ -147,12 +147,11 @@ class TaskStickerXL extends HTMLElement {
 
 
                     <div class="usuario">   
-                            <div class="d-flex justify-content-end bg-transparent">
-                                <div class="bg-transparent d-flex justify-content-end">
-                                    <a href="#" class="btn btn-sm btn-flash-border-primary background-${postItColour}">View All</a>
-                            <div class="btn-task bg-transparent d-flex justify-content-end pe-1 pb-1" role="group" aria-label="Collaborators icons">
+                            <div class="d-flex  background-${postItColour}">
+                                <div class="bg-transparent d-flex  ">
+                            <div class="btn-task background-${postItColour} d-flex  pe-2 pb-1"  role="group" aria-label="Collaborators icons">
                                         <button type="button" class="btn background-${postItColour}">
-                                            <img src="https://placehold.co/40x40"></img>
+                                            <img src="https://placehold.co/60x60"></img>
                                     </button>
                                 </div> 
                             </div>       
