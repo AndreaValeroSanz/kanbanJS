@@ -16,6 +16,7 @@
     />
 
     <link rel="stylesheet" href="/style.css" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script>
     <title>Kanban</title>      
   </head>
 
@@ -75,8 +76,18 @@
         </div>
       </div>
     </div>
+    
     <add-task></add-task>
 
+    <div>
+       <task-sticker-xl title="Task 2" description="Description of task 2"  postItColour="yellow" dueDate="No date assigned."></task-sticker-xl>
+    </div>
+  </body>
+
+
+    
+    <script type="module" src="/src/Components/TaskSticker.js"></script>
+   <!-- <script type="module" src="/src/Components/TaskStickerXL.js"></script>-->
     <script type="module" src="/src/Controllers/FetchCard.js"></script>
     <script type="module" src="/src/Components/AddTask.js"></script>
     <script type="module" src="/src/Components/TaskColumn.js"></script>
@@ -87,7 +98,6 @@
     <script type="module" src="/src/Controllers/CreateController.js"></script>
     <script type="module" src="/main.js"></script>
     <script type="module" src="/src/Components/Collaborators.js"></script>
-    <script type="module" src="/src/Components/TaskSticker.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
