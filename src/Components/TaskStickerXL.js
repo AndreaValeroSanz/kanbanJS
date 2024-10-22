@@ -1,9 +1,10 @@
-class TaskSticker extends HTMLElement {
+class TaskStickerXL extends HTMLElement {
     constructor() {
       super();
     }
   
     connectedCallback() {
+      
       const title = this.getAttribute('title');
       const description = this.getAttribute('description') || 'Please, remember to write a task description.';
       const postItColour = this.getAttribute('postItColour');
@@ -28,7 +29,7 @@ class TaskSticker extends HTMLElement {
       }
   
       .card {
-          position: relative;
+          position: absolute;
           display: flex;
           flex-direction: column;
           min-width: 0;
@@ -36,8 +37,10 @@ class TaskSticker extends HTMLElement {
           background-clip: border-box;
           border: 1px solid #e6e4e9;
           border-radius: 8px;
-          width: 60vh;
-          height: 60vh;
+          width: 50vh;
+          height: 50vh;
+          top: 50%;
+          left: 50%;
       }
   
       .card .card-header.no-border {
@@ -63,7 +66,6 @@ class TaskSticker extends HTMLElement {
     .btn-task .btn img {
                 border-radius: 50%;
                 border: 2px solid #fafafa;
-                clip-path:circle(50% at 50% 50%);
                 background-color: transparent;
             }
             
@@ -148,8 +150,8 @@ class TaskSticker extends HTMLElement {
                             <div class="d-flex justify-content-end bg-transparent">
                                 <div class="bg-transparent d-flex justify-content-end">
                                     <a href="#" class="btn btn-sm btn-flash-border-primary background-${postItColour}">View All</a>
-                            <div class="btn-taks bg-transparent d-flex justify-content-end pe-1 pb-1" role="group" aria-label="Collaborators icons">
-                                        <button type="button" class="btn btn-outline-primary">
+                            <div class="btn-task bg-transparent d-flex justify-content-end pe-1 pb-1" role="group" aria-label="Collaborators icons">
+                                        <button type="button" class="btn background-${postItColour}">
                                             <img src="https://placehold.co/40x40"></img>
                                     </button>
                                 </div> 
@@ -222,5 +224,5 @@ class TaskSticker extends HTMLElement {
     }
   }
   
-  customElements.define('task-sticker', TaskSticker);
+  customElements.define('task-sticker-xl', TaskStickerXL);
   
