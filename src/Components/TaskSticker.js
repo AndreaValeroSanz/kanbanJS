@@ -71,7 +71,7 @@ class TaskSticker extends HTMLElement {
     .btn-task .btn img {
             border-radius: 50%;
             border: 2px solid #fafafa;
-        
+            
             background-color: transparent;
           }
             
@@ -90,16 +90,16 @@ class TaskSticker extends HTMLElement {
 
                   </div>
                 </div>
-                <div class="card-body d-flex pt-0 g-0 p-0 mx-2 row background-${postItColour}">
-                  <h5 class="card-title bg-transparent text-center">${title}</h5>
+                <div class="card-body d-flex pt-0 g-0 p-0 px-3 my-0 row background-${postItColour}">
+                  <h5 class="card-title bg-transparent text-center ">${title}</h5>
                                
-                            <div class="bg-transparent d-flex  align-self-center ">
-                                <span class=" d-flex align-self-end background-${postItColour}">${dueDate}</span>
+                            <div class="bg-transparent d-flex align-items-center align-self-center d-flex justify-content-between">
+                                <span class=" d-flex align-self-end align-self-center align-items-center background-${postItColour}">${dueDate}</span>
                           
 
                                
-                            <div class="btn-task bg-transparent d-flex justify-content-end pe-1 pb-1" role="group" aria-label="Collaborators icons">
-                                        <button type="button" class="btn background-${postItColour}">
+                            <div class="btn-task bg-transparent d-flex justify-content-end pe-0 pb-0" role="group" aria-label="Collaborators icons">
+                                        <button type="button" class=" p-0 btn background-${postItColour}">
                                             <img src="https://placehold.co/40x40"></img>
                                     </button>
                         </div>
