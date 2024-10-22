@@ -87,8 +87,8 @@
   content: "\F5D4";
   font-family: bootstrap-icons !important;
   display: block;
-  position: absolute;
-  right: 0;
+  /*position: absolute;*/
+  left: 0;
   opacity: 0.1;
   transition: opacity 0.3s;
 }

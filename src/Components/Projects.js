@@ -13,28 +13,28 @@ class Projects extends HTMLElement {
   <li class="py-1">
     <button type="button" class="btn boton">
       <i class="bi bi-circle-fill pe-2" style="color: #4da167;"></i>
-      MobileApp
+      MobileApp<pre>  </pre>
     </button>
   </li>
 
   <li class="py-1">
     <button type="button" class="btn boton">
       <i class="bi bi-circle-fill pe-2" style="color: #2589bd;"></i>
-      MobileApp
+      MobileApp<pre>  </pre>
     </button>
   </li>
 
   <li class="py-1">
     <button type="button" class="btn boton">
       <i class="bi bi-circle-fill pe-2" style="color: #f5bb00;"></i>
-      MobileApp
+      MobileApp<pre>  </pre>
     </button>
   </li>
 
   <li class="py-1">
     <button type="button" class="btn boton">
       <i class="bi bi-circle-fill pe-2" style="color: #ed98b4;"></i>
-      MobileApp
+      MobileApp<pre>  </pre>
     </button>
   </li>
 </ul>
