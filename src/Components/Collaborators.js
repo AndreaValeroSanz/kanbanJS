@@ -54,7 +54,7 @@ class Collaborators extends HTMLElement {
   
         <div class="collaborators">
           <div class="row pt-5">
-            <button type="button" class="">
+            <button type="button" class="btn">
               <i class="bi bi-plus-square"></i>
             </button>
           </div>
