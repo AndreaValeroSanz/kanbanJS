@@ -113,4 +113,5 @@ class TaskSticker extends HTMLElement {
   }
 }
 
+// Define custom element
 customElements.define('task-sticker', TaskSticker);

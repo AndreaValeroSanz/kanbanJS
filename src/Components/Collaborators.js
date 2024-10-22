@@ -76,6 +76,6 @@ class Collaborators extends HTMLElement {
     
   }
 
+  // Define custom element
   customElements.define("my-collaborators", Collaborators);
-  
   

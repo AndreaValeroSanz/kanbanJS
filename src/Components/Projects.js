@@ -42,4 +42,5 @@ class Projects extends HTMLElement {
   }
 }
 
+// Define custom element
 customElements.define("my-projects", Projects);
