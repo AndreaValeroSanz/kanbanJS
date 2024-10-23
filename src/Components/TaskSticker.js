@@ -36,8 +36,8 @@ class TaskSticker extends HTMLElement {
         background-clip: border-box;
         border: 1px solid #e6e4e9;
         border-radius: 8px;
-        width: 20vh;
-        height: 20vh;
+        width: 18vh;
+        height: 18vh;
     }
 
     .card .card-header.no-border {
