@@ -1,8 +1,7 @@
 class TaskColumn extends HTMLElement {
   constructor() {
     super();
-    // Adjuntar el shadow DOM
-    this.attachShadow({ mode: "open" });
+    
   }
 
   // Se llama cuando el elemento se conecta al DOM
@@ -58,9 +57,7 @@ class TaskColumn extends HTMLElement {
             margin-bottom: 10px;
         }
 
-        .task-item {
-            /*TODO: los postits*/
-        }
+        
        
       </style>
 
