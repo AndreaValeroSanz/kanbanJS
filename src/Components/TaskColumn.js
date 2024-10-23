@@ -19,7 +19,7 @@ class TaskColumn extends HTMLElement {
           padding: 10px;
           width: 200px;
           min-height: 300px;
-          height: 90vh;
+          height: 70vh;
           border: 1px solid #dbdbdb;
           box-sizing: border-box;
         }
@@ -58,6 +58,7 @@ class TaskColumn extends HTMLElement {
         .btn-new-task:hover {
           opacity: 0.8;
         }
+        
       </style>
   
       <div class="task-column">
@@ -66,7 +67,7 @@ class TaskColumn extends HTMLElement {
             ${taskIcon ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>` : ""}
           </div>
           <button type="button" id="openModalButton" class="btn-new-task" aria-label="Open new task modal">
-            <!-- SVG code here -->
+            <i class="bi bi-plus-square"></i>
           </button>
         </div>
   

@@ -65,6 +65,14 @@ class TaskSticker extends HTMLElement {
       background-color: #92c4de;
     }
 
+    .background-pink {
+      background-color: #ed98b4;
+    }
+
+    .background-green {
+      background-color: #a6d0b3;
+    }
+      
        .btn-task btn{
             border-radius: 50%;
             border: 2px solid #fafafa;

@@ -175,3 +175,10 @@ li {
   font-style: italic;
 }
 
+.overflow {
+  max-height: 60vh; /* Set a height limit for the container */
+  overflow-y: auto;  /* Enable vertical scrolling */
+}
+.overflow::-webkit-scrollbar {
+  display: none; 
+}
