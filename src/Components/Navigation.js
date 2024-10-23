@@ -24,5 +24,6 @@ class Navigation extends HTMLElement {
     }
   }
   
+  // Define custom element
   customElements.define("my-navigation", Navigation);
   

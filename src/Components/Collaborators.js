@@ -43,18 +43,29 @@ class Collaborators extends HTMLElement {
             margin-bottom: 5px;
             font-size: 14px;
           }
-          
+          .collaborators{
+            display: flex;
+            justify-content: flex-end;
+          }
+          .spacer{
+            padding-inline-start: 2rem;
+          }
         </style>
   
-        <div>
+        <div class="collaborators">
           <div class="row pt-5">
+            <button type="button" class="btn">
+              <i class="bi bi-plus-square"></i>
+            </button>
+          </div>
+
+          <div class="row pt-5 spacer">
             <div class="col-lg-10 d-flex justify-content-end align-items-center collaborator-section">
            
               <div class="btn-group" role="group" aria-label="Collaborators icons">
                 <button type="button" class="btn btn-outline-primary">
                   <img src="https://placehold.co/40x40"></img>
                 </button>
-
                 <button type="button" class="btn btn-outline-primary">
                    <img src="https://placehold.co/40x40"></img>
                 </button>
@@ -76,6 +87,6 @@ class Collaborators extends HTMLElement {
     
   }
 
+  // Define custom element
   customElements.define("my-collaborators", Collaborators);
-  
   

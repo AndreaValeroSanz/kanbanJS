@@ -60,4 +60,5 @@ class AddTask extends HTMLElement {
   }
 }
 
+// Define custom element
 customElements.define('add-task', AddTask);

@@ -59,4 +59,5 @@ class Header extends HTMLElement {
   }
 }
 
+// Define custom element
 customElements.define("my-header", Header);
