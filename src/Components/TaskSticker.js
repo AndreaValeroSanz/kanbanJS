@@ -80,7 +80,7 @@ class TaskSticker extends HTMLElement {
 
 <div class="container ">
     <div class="row  ">
-        <div class="col-lg-4  g-0">
+        <div class="g-0">
             <div class="card card-margin  background-${postItColour}">
                 <div class="card-header no-border d-flex justify-content-end mt-2 ">
                   <div >

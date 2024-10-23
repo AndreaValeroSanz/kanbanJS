@@ -1,32 +1,29 @@
 class TaskColumn extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
   }
-
   connectedCallback() {
     const title = this.getAttribute("title");
     const taskIcon = this.getAttribute("taskIcon");
-    this.render(title, taskIcon);
-  }
-
-  render(title, taskIcon) {
-    this.shadowRoot.innerHTML = `
+  
+    // Get the slotted content
+    const slotContent = this.querySelector('[slot="content"]');
+  
+    // Minimal rendering changes to prevent overwriting the slot content
+    this.innerHTML = `
       <style>
-        :host {
-          border-radius: 8px;
-          box-shadow: -15px 15px 0px 0px rgba(219, 219, 219, 1);
-        }
-
         .task-column {
-          background-color: #F8F8F8;
           border-radius: 8px;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          background-color: #F8F8F8;
           padding: 10px;
           width: 200px;
           min-height: 300px;
           height: 90vh;
           border: 1px solid #dbdbdb;
+          box-sizing: border-box;
         }
+
         .task-icon-new-task {
           display: flex;
           align-items: center;
@@ -50,34 +47,44 @@ class TaskColumn extends HTMLElement {
           height: 40px;
           margin-bottom: 10px;
         }
-      </style>
 
+        .btn-new-task {
+          border: none;
+          background: none;
+          padding: 0;
+          cursor: pointer;
+        }
+
+        .btn-new-task:hover {
+          opacity: 0.8;
+        }
+      </style>
+  
       <div class="task-column">
         <div class="task-icon-new-task">
           <div class="icon-container">
             ${taskIcon ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>` : ""}
           </div>
-          <button type="button" id="openModalButton" class="btn-new-task">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" style="color: #5030e5" viewBox="0 0 32 32">
-              <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-            </svg>
+          <button type="button" id="openModalButton" class="btn-new-task" aria-label="Open new task modal">
+            <!-- SVG code here -->
           </button>
         </div>
-
+  
         <h2>${title}</h2>
         <hr>
-        <div class="task-item"></div>
+  
+        <!-- Include the slotted content -->
+        ${slotContent ? slotContent.outerHTML : ''}
       </div>
     `;
-
-    // Use shadowRoot to access elements inside shadow DOM
-    this.shadowRoot.querySelector('#openModalButton').addEventListener('click', () => {
-      const event = new CustomEvent('openTaskModal');
-      window.dispatchEvent(event); // Dispatch the event globally to open the modal
+  
+    // Event listener for modal button
+    this.querySelector('#openModalButton').addEventListener('click', () => {
+      const event = new CustomEvent('openTaskModal', { detail: { columnTitle: title } });
+      window.dispatchEvent(event);
     });
   }
 }
 
-// Define custom element
-customElements.define("task-column", TaskColumn);
+// Define the custom element without Shadow DOM
+customElements.define('task-column', TaskColumn);

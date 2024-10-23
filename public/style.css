@@ -149,5 +149,29 @@ li {
 
 .drag{
   cursor: pointer;
-  z-index: 10;
 }
+.drag.gu-transit {
+  opacity: 0.5;
+}
+
+.drag.gu-mirror {
+  position: fixed;
+  z-index: 9999;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.placeholder {
+  background-color: #f8f9fa;
+  border: 1px dashed #dee2e6;
+  padding: 10px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.placeholder p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
