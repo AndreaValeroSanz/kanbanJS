@@ -14,7 +14,7 @@ class TaskColumn extends HTMLElement {
       <style>
         .task-column {
           border-radius: 8px;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: -10px 10px 0px 0px rgba(206,204,204,1);
           background-color: #F8F8F8;
           padding: 10px;
           width: 200px;
@@ -22,6 +22,7 @@ class TaskColumn extends HTMLElement {
           height: 90vh;
           border: 1px solid #dbdbdb;
           box-sizing: border-box;
+          
         }
 
         .task-icon-new-task {
@@ -61,6 +62,7 @@ class TaskColumn extends HTMLElement {
       </style>
   
       <div class="task-column">
+            
         <div class="task-icon-new-task">
           <div class="icon-container">
             ${taskIcon ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>` : ""}
