@@ -62,11 +62,11 @@ class TaskColumn extends HTMLElement {
       </style>
   
       <div class="task-column">
-        <div class="task-icon-new-task">
+        <div class="task-icon-new-task ">
           <div class="icon-container">
             ${taskIcon ? `<img src="${taskIcon}" alt="task-icon" class="icon"/>` : ""}
           </div>
-          <button type="button" id="openModalButton" class="btn-new-task" aria-label="Open new task modal">
+          <button type="button" id="openModalButton" class="btn-new-task" aria-label="Open new task modal" >
             <i class="bi bi-plus-square"></i>
           </button>
         </div>
@@ -83,7 +83,8 @@ class TaskColumn extends HTMLElement {
     this.querySelector('#openModalButton').addEventListener('click', () => {
       const event = new CustomEvent('openTaskModal', { detail: { columnTitle: title } });
       window.dispatchEvent(event);
-    });
+   });
+   
   }
 }
 

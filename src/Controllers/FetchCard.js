@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function getAllTasks() {
     // Get the last task ID from localStorage to know how many tasks there are
     let lastTaskId = localStorage.getItem("lastTaskId");
-    const taskContainer = document.getElementById('sticker');
+    const taskContainer = document.getElementById('taskContainer');
 
     // Check if there are tasks stored
     if (lastTaskId === null) { 
@@ -19,11 +19,36 @@ function getAllTasks() {
     for (let i = 1; i <= lastTaskId; i++) {
       const taskKey = `task-${i}`;
       const task = localStorage.getItem(taskKey);
-  
+
+      
       if (task !== null) {
+        const [title, description, dueDate, workarea] = task.split(';');
+
+        // Convert the due date to a Date object
+        const dueDateObj = new Date(dueDate);
+
+
+        function color() {
+          if (workarea === "Front") {
+            return "pink";
+          } else if (workarea === "Back") {
+            return "blue";
+          } else if (workarea === "Server") {
+            return "yellow";
+          } else if (workarea === "Testing") {
+            return "green";
+          }
+        }
+        const postItColour =  color();
+        console.log(title, postItColour, dueDateObj);
+
         // Log the task to the console (you can render it in your UI instead)
-        console.log(`Task ${i}: ${task}`);
-        taskContainer.innerHTML  += task;
+        taskContainer.innerHTML  += `
+        <div class="drag">
+          <task-sticker title=${title} postItColour=${postItColour} dueDate=${dueDate}></task-sticker>
+        </div>
+        
+        `;
 
       } else {
         console.log(`Task ${i} does not exist.`);

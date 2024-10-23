@@ -28,28 +28,28 @@ class Header extends HTMLElement {
                 <li class="py-1 ps-3">
                   <button type="button" class=" p-0 border-0">
                     <i class="bi bi-circle-fill pe-2" style="color: #4da167;"></i>
-                    MobileApp
+                    Testing
                   </button>
                 </li>
   
                 <li class="py-1 ps-3">
                   <button type="button" class=" p-0 border-0">
                     <i class="bi bi-circle-fill pe-2" style="color: #2589bd;"></i>
-                    MobileApp
+                    Back
                   </button>
                 </li>
   
                 <li class="py-1 ps-3">
                   <button type="button" class=" p-0 border-0">
                     <i class="bi bi-circle-fill pe-2" style="color: #f5bb00;"></i>
-                    MobileApp
+                    Server
                   </button>
                 </li>
   
                 <li class="py-1 ps-3">
                   <button type="button" class=" p-0 border-0">
                     <i class="bi bi-circle-fill pe-2" style="color: #ed98b4;"></i>
-                    MobileApp
+                    Front
                   </button>
                 </li>
               </ul>

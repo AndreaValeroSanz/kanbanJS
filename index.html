@@ -47,19 +47,8 @@
 
             <!-- Task Columns -->
             <task-column id="on-hold" title="On hold" taskIcon="./public/Assets/iconosTaskColumns/On_hold.svg">
-              <div slot="content" class="overflow">
-                  <div class="drag">
-                    <task-sticker title="pikachu" postItColour="yellow" dueDate="10/10/2022" ></task-sticker>
-                  </div>
-                  <div class="drag">
-                    <task-sticker title="squirtle" postItColour="blue" dueDate="10/10/2022" ></task-sticker>
-                  </div>
-                  <div class="drag">
-                    <task-sticker title="cleffairy" postItColour="pink" dueDate="10/10/2022" ></task-sticker>
-                  </div>
-                  <div class="drag">
-                    <task-sticker title="Chikorita" postItColour="green" dueDate="10/10/2022" ></task-sticker>
-                  </div>
+              <div slot="content" class="overflow" id="taskContainer">
+
               </div>
               
           </task-column>
@@ -87,7 +76,8 @@
 
               </div>
           </task-column>
-          
+
+          <add-task></add-task>
 
           </div>
         </div>
