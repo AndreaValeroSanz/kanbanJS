@@ -32,6 +32,7 @@ function checkForEmptyColumn(column) {
         // Add placeholder if no items exist
         if (!column.querySelector('.placeholder')) {
             const placeholder = document.createElement('div');
+            placeholder.style.cssText = 'background-color: #F8F8F8; width: 18vh;';
             placeholder.classList.add('placeholder');
             placeholder.innerHTML = '<p>Drop items here</p>';
             column.appendChild(placeholder);

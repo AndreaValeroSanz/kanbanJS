@@ -29,11 +29,13 @@ class TaskColumn extends HTMLElement {
           align-items: center;
           justify-content: space-between;
           margin-bottom: 10px;
+          background-color: #F8F8F8;
         }
 
         .task-column h2 {
           font-size: 1.2rem;
           font-weight: 500;
+          background-color: #F8F8F8;
         }
 
         .task-column hr {
