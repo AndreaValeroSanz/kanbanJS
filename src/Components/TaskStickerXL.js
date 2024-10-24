@@ -221,6 +221,15 @@ class TaskStickerXL extends HTMLElement {
           alert('Your browser does not support sharing tasks.');
         }
       });
+
+      
+
+      window.addEventListener('click', (event) => {
+        if (event.target !== taskSticker) {
+          $(modal).modal('hide');
+        }
+      });
+
     }
   }
   
