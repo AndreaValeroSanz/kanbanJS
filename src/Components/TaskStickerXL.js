@@ -73,7 +73,7 @@ class TaskStickerXL extends HTMLElement {
       
   </style>
   
-  <div class="container">
+  <div class="container" id="StickerXL">
       <div class="row">
       
           <div class="col-lg-4 g-0">
@@ -222,8 +222,8 @@ class TaskStickerXL extends HTMLElement {
         }
       });
 
-      
 
+      
       window.addEventListener('click', (event) => {
         if (event.target !== taskSticker) {
           $(modal).modal('hide');
@@ -234,4 +234,5 @@ class TaskStickerXL extends HTMLElement {
   }
   
   customElements.define('task-sticker-xl', TaskStickerXL);
+  export default TaskStickerXL;
   

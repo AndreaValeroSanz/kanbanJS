@@ -1,19 +1,29 @@
+import TaskStickerXL from './TaskStickerXL.js';
 class TaskSticker extends HTMLElement {
   constructor() {
     super();
+    this.taskStickerXL = new TaskStickerXL();
   }
 
   connectedCallback() {
-    const taskStickerElement = this;
+    //const taskStickerElement = this;
     const title = this.getAttribute('title');
     const description = this.getAttribute('description') || 'Please, remember to write a task description.';
     const postItColour = this.getAttribute('postItColour');
     const dueDate = this.getAttribute('dueDate') || 'No date assigned.';
+    const StickerXL = document.getElementById('StickerXL');
     this.render(title, description, postItColour, dueDate);
     this.addEventListeners();
+    this.querySelector("#card-title").addEventListener('click', () => {
+      this.taskStickerXL.setAttribute("title", this.getAttribute('title'));
+      this.taskStickerXL.setAttribute("description", this.getAttribute('description'));
+      this.taskStickerXL.setAttribute("postItColour", this.getAttribute('postItColour'));
+      this.taskStickerXL.setAttribute("dueDate", this.getAttribute('dueDate'));
+      this.taskStickerXL.modal('show');
+    })
   }
 
-  render(title, description, postItColour, dueDate) {
+  render(title, description, postItColour, dueDate, StickerXL) {
     this.innerHTML = `
 <style>
     .card-margin {
@@ -77,7 +87,7 @@ class TaskSticker extends HTMLElement {
        .btn-task btn{
             border-radius: 50%;
             border: 2px solid #fafafa;
-            clip-path:circle(50% at 50% 50%);
+           
             background-color: transparent;
           }
 
@@ -104,7 +114,7 @@ class TaskSticker extends HTMLElement {
                   </div>
                 </div>
                 <div class="card-body d-flex pt-0 g-0 p-0 mx-2 row background-${postItColour}">
-                  <h5 class="card-title bg-transparent text-center">${title}</h5>
+                  <h5 class="card-title bg-transparent text-center" id="card-title">${title}</h5>
                                
                             <div class="bg-transparent d-flex  align-self-center ">
                                 <span class=" d-flex align-self-end background-${postItColour}">${dueDate}</span>
@@ -128,6 +138,8 @@ class TaskSticker extends HTMLElement {
 
     `;
   }
+
+  
 
   addEventListeners() {
     const taskSticker = this.querySelector('.post-it');
@@ -186,7 +198,17 @@ class TaskSticker extends HTMLElement {
       }
     });
 
-    taskSwapToXL.addEventListener('click', () => {
+
+    document.getElementById('card-title').addEventListener('click', ()=>{
+    this.taskStickerXL.setAttribute('title', this.getAttribute('title'));
+    this.taskStickerXL.setAttribute('description', this.getAttribute('description'));
+    this.taskStickerXL.setAttribute('postItColour', this.getAttribute('postItColour'));
+    this.taskStickerXL.setAttribute('dueDate', this.getAttribute('dueDate'));
+    this.taskStickerXL.modal('show');
+  });
+
+
+    /* taskSwapToXL.addEventListener('click', () => {
       const parentElement = taskStickerElement.parentElement;
       const newTaskStickerXL= document.createElement('task-sticker-xl');
 
@@ -196,10 +218,15 @@ class TaskSticker extends HTMLElement {
       newTaskStickerXL.setAttribute('dueDate', taskStickerElement.getAttribute('dueDate'));
       parentElement.replaceChild(newTaskStickerXL, taskStickerElement);
       
-    });
+    }); */
+    
   }
 }
 
 // Define custom element
 customElements.define('task-sticker', TaskSticker);
 customElements.define('task-sticker-xl', TaskStickerXL);
+/*StickerXL.addEventListener("click"()=>{
+  target.TaskStickerXL.modal("show");
+  })
+*/
