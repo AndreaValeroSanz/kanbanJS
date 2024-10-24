@@ -6,7 +6,7 @@ class TaskSticker extends HTMLElement {
   }
 
   connectedCallback() {
-    //const taskStickerElement = this;
+    const taskStickerElement = this;
     const title = this.getAttribute('title');
     const description = this.getAttribute('description') || 'Please, remember to write a task description.';
     const postItColour = this.getAttribute('postItColour');
@@ -153,7 +153,16 @@ class TaskSticker extends HTMLElement {
 
     // Open the modal when clicking on the post-it
     taskSticker.addEventListener('click', () => {
-      $(modal).modal('show');
+      const taskStickerXL = document.getElementById('task-sticker-xl');
+      taskStickerXL.setAttribute('title', this.getAttribute('title'));
+      taskStickerXL.setAttribute('description', this.getAttribute('description'));
+      taskStickerXL.setAttribute('postItColour', this.getAttribute('postItColour'));
+      taskStickerXL.setAttribute('dueDate', this.getAttribute('dueDate'));
+
+
+      const modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = ''; // para limpiar el contenido que hubiera o algo asi
+      modalBody.appendChild(taskStickerXL);
     });
 
     // Close modal on click of close buttons
