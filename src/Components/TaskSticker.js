@@ -4,6 +4,7 @@ class TaskSticker extends HTMLElement {
   }
 
   connectedCallback() {
+    const taskStickerElement = this;
     const title = this.getAttribute('title');
     const description = this.getAttribute('description') || 'Please, remember to write a task description.';
     const postItColour = this.getAttribute('postItColour');
@@ -135,6 +136,8 @@ class TaskSticker extends HTMLElement {
     const deleteButton = this.querySelector('.delete-task');
     const shareButton = this.querySelector('.share-task');
     const archiveButton = this.querySelector('.archive-task');
+    const taskSwapToXL = document.getElementById('task-sticker-xl');
+
 
     // Open the modal when clicking on the post-it
     taskSticker.addEventListener('click', () => {
@@ -182,8 +185,21 @@ class TaskSticker extends HTMLElement {
         alert('Your browser does not support sharing tasks.');
       }
     });
+
+    taskSwapToXL.addEventListener('click', () => {
+      const parentElement = taskStickerElement.parentElement;
+      const newTaskStickerXL= document.createElement('task-sticker-xl');
+
+      newTaskStickerXL.setAttribute('title', taskStickerElement.getAttribute('title'));
+      newTaskStickerXL.setAttribute('description', taskStickerElement.getAttribute('description'));
+      newTaskStickerXL.setAttribute('postItColour', taskStickerElement.getAttribute('postItColour'));
+      newTaskStickerXL.setAttribute('dueDate', taskStickerElement.getAttribute('dueDate'));
+      parentElement.replaceChild(newTaskStickerXL, taskStickerElement);
+      
+    });
   }
 }
 
 // Define custom element
 customElements.define('task-sticker', TaskSticker);
+customElements.define('task-sticker-xl', TaskStickerXL);
