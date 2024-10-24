@@ -22,7 +22,7 @@
 * {
   background-color: var(--white);
   font-family: "GlacialIndifference", sans-serif;
-  overflow: hidden;
+  /*overflow: hidden;*/ /*Conflicto con el box shadow*/
 }
 
 .bg-gray {

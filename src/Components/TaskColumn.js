@@ -14,10 +14,10 @@ class TaskColumn extends HTMLElement {
       <style>
         .task-column {
           border-radius: 8px;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: -10px 10px 0px 0px rgba(219, 219, 219, 1);
           background-color: #F8F8F8;
           padding: 10px;
-          width: 200px;
+          width: 20vh;
           min-height: 300px;
           height: 70vh;
           border: 1px solid #dbdbdb;
