@@ -61,19 +61,8 @@ window.dragInit = function () {
         }
     }
 
-// Function to add/remove placeholder based on column content
-function checkForEmptyColumn(column) {
-    if (!column.querySelector('.drag')) {
-        // Add placeholder if no items exist
-        if (!column.querySelector('.placeholder')) {
-            const placeholder = document.createElement('div');
-            placeholder.style.cssText = 'background-color: #F8F8F8; width: 18vh;';
-            placeholder.classList.add('placeholder');
-            placeholder.innerHTML = '<p>Drop items here</p>';
-            column.appendChild(placeholder);
-        }
-    } else {
-        // Remove placeholder if items are present
+    // Function to add/remove placeholder based on column content
+    function updatePlaceholder(column) {
         const placeholder = column.querySelector('.placeholder');
         const hasItems = column.querySelector('.drag');
 
