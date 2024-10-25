@@ -8,39 +8,73 @@ window.dragInit = function () {
     ];
 
     // Add placeholders for empty columns
+    columns.forEach(column => updatePlaceholder(column));
+
+    // Initialize drag and drop on all draggable items
+    const draggableItems = document.querySelectorAll('.drag');
+    draggableItems.forEach(item => {
+        item.setAttribute('draggable', 'true');
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragend', handleDragEnd);
+    });
+
+    // Set up dragover and drop events for columns
     columns.forEach(column => {
-        checkForEmptyColumn(column);
+        column.addEventListener('dragover', handleDragOver);
+        column.addEventListener('drop', handleDrop);
     });
 
-    // Initialize Dragula
-    const drake = dragula(columns, {
-        moves: function (el, container, handle) {
-            return el.classList.contains('drag');
+    // Functions to handle drag-and-drop events
+    let draggedItem = null;
+    let sourceColumn = null;
+
+    function handleDragStart(e) {
+        draggedItem = e.target;
+        sourceColumn = draggedItem.parentNode;
+
+        // Temporarily remove the item and update placeholder for source column
+        updatePlaceholder(sourceColumn);
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", e.target.id);
+    }
+
+    function handleDragEnd(e) {
+        draggedItem = null;
+        sourceColumn = null;
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const targetColumn = e.currentTarget;
+
+        if (draggedItem) {
+            // Append the item to the target column
+            targetColumn.appendChild(draggedItem);
+
+            // Update placeholders for both source and target columns
+            updatePlaceholder(sourceColumn);
+            updatePlaceholder(targetColumn);
         }
-    });
+    }
 
-    // Event: After an item is dropped
-    drake.on('drop', function(el, target, source, sibling) {
-        checkForEmptyColumn(source); // Check source column after item is removed
-        checkForEmptyColumn(target); // Check target column after item is added
-    });
-};
-
-// Function to add/remove placeholder based on column content
-function checkForEmptyColumn(column) {
-    if (!column.querySelector('.drag')) {
-        // Add placeholder if no items exist
-        if (!column.querySelector('.placeholder')) {
-            const placeholder = document.createElement('div');
-            placeholder.classList.add('placeholder');
-            placeholder.innerHTML = '<p>Drop items here</p>';
-            column.appendChild(placeholder);
-        }
-    } else {
-        // Remove placeholder if items are present
+    // Function to add/remove placeholder based on column content
+    function updatePlaceholder(column) {
         const placeholder = column.querySelector('.placeholder');
-        if (placeholder) {
+        const hasItems = column.querySelector('.drag');
+
+        if (!hasItems && !placeholder) {
+            // Add placeholder if no items exist
+            const newPlaceholder = document.createElement('div');
+            newPlaceholder.classList.add('placeholder');
+            newPlaceholder.innerHTML = '<p>Drop items here</p>';
+            column.appendChild(newPlaceholder);
+        } else if (hasItems && placeholder) {
+            // Remove placeholder if items are present
             column.removeChild(placeholder);
         }
     }
-}
+};
