@@ -1,64 +1,56 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetchCard(); // Llama a la función CreateTask cuando la página carga
+  getAllTasks();
 });
-function getAllTasks() {
-    // Get the last task ID from localStorage to know how many tasks there are
-    let lastTaskId = localStorage.getItem("lastTaskId");
-    const taskContainer = document.getElementById('taskContainer');
 
-    // Check if there are tasks stored
-    if (lastTaskId === null) { 
-      console.log("No tasks found.");
+function getAllTasks() {
+  const taskContainer = document.getElementById('taskContainer');
+  let lastTaskId = localStorage.getItem("lastTaskId");
+
+  // Check if `lastTaskId` exists and that `taskContainer` is available
+  if (!lastTaskId || !taskContainer) { 
+      console.log("No tasks found or taskContainer is missing.");
       return;
-    }
-  
-    // Convert the task ID to an integer
-    lastTaskId = parseInt(lastTaskId);
-  
-    // Loop through all task keys and retrieve the tasks
-    for (let i = 1; i <= lastTaskId; i++) {
+  }
+
+  // Parse the last task ID as an integer
+  lastTaskId = parseInt(lastTaskId);
+
+  for (let i = 1; i <= lastTaskId; i++) {
       const taskKey = `task-${i}`;
       const task = localStorage.getItem(taskKey);
 
-      
-      if (task !== null) {
-        const [title, description, dueDate, workarea] = task.split(';');
+      // Check if the task data exists in localStorage
+      if (task) {
+          const [title, description, dueDate, workarea] = task.split(';');
+          const postItColour = getColor(workarea);
 
-        // Convert the due date to a Date object
-        const dueDateObj = new Date(dueDate);
+          // Create a TaskStickerController element for each task
+          const taskStickerController = document.createElement('task-sticker-controller');
+          taskStickerController.setAttribute('title', title);
+          taskStickerController.setAttribute('description', description);
+          taskStickerController.setAttribute('postItColour', postItColour);
+          taskStickerController.setAttribute('dueDate', new Date(dueDate).toISOString().split('T')[0]);
 
+          // Wrap the task sticker controller in a div for draggable functionality
+          const wrapper = document.createElement('div');
+          wrapper.classList.add('drag'); // For drag-and-drop capability
+          wrapper.appendChild(taskStickerController);
 
-        function color() {
-          if (workarea === "Front") {
-            return "pink";
-          } else if (workarea === "Back") {
-            return "blue";
-          } else if (workarea === "Server") {
-            return "yellow";
-          } else if (workarea === "Testing") {
-            return "green";
-          }
-        }
-        const postItColour =  color();
-        console.log(title, postItColour, dueDateObj);
-
-        // Log the task to the console (you can render it in your UI instead)
-        taskContainer.innerHTML  += `
-        <div class="drag">
-          <task-sticker title=${title} postItColour=${postItColour} dueDate=${dueDate}></task-sticker>
-        </div>
-        
-        `;
-
+          // Append the wrapper to the taskContainer
+          taskContainer.appendChild(wrapper);
       } else {
-        console.log(`Task ${i} does not exist.`);
+          console.log(`Task ${i} does not exist.`);
       }
-    }
   }
-  
-  // Call the function when the page loads to retrieve all tasks
-  document.addEventListener('DOMContentLoaded', function () {
-    getAllTasks(); // This will log all stored tasks to the console
-  });
-  
+}
 
+// Helper function to determine color based on the work area
+function getColor(workarea) {
+  switch (workarea) {
+      case "Front": return "pink";
+      case "Back": return "blue";
+      case "Server": return "yellow";
+      case "Testing": return "green";
+      default: return "yellow"; // default color if no match
+  }
+}
