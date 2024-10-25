@@ -70,12 +70,33 @@ class TaskStickerXL extends HTMLElement {
 
       // Delete task button
       if (deleteButton) {
-          deleteButton.addEventListener('click', () => {
-              if (confirm('Are you sure you want to delete this task?')) {
-                  this.remove();
-              }
-          });
-      }
+        deleteButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this task?')) {
+                // Obtener la clave de la tarea del atributo 'data-key'
+                const taskKey = this.getAttribute('data-key');
+
+                // Eliminar del localStorage usando la clave
+                if (taskKey) {
+                    localStorage.removeItem(taskKey);
+                    console.log(`Tarea con clave ${taskKey} eliminada.`);
+
+                    // Eliminar el elemento del DOM
+                    this.remove();
+                    toggleButton.addEventListener('click', () => {
+                      element.classList.toggle('hidden');
+                      setTimeout(() => {
+                        window.location.reload(true);  // Refresca la página después de la eliminación
+                    }, 200);
+                       // Alternar la clase 'hidden'
+                  });
+                } else {
+                    console.error('No se encontró el atributo data-key para eliminar la tarea.');
+                }
+                
+            }
+        });
+    }
+
 
       // Archive task button
       if (archiveButton) {

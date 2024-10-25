@@ -27,6 +27,7 @@ function getAllTasks() {
           // Create a TaskStickerController element for each task
           const taskStickerController = document.createElement('task-sticker-controller');
           taskStickerController.setAttribute('title', title);
+          taskStickerController.setAttribute('data-key', taskKey);
           taskStickerController.setAttribute('description', description);
           taskStickerController.setAttribute('postItColour', postItColour);
           taskStickerController.setAttribute('dueDate', new Date(dueDate).toISOString().split('T')[0]);

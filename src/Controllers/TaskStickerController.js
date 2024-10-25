@@ -19,15 +19,21 @@ class TaskStickerController extends HTMLElement {
 
         // Render either TaskSticker or TaskStickerXL based on the `expanded` state
         if (this.expanded) {
-            this.innerHTML = `<task-sticker-xl title="${this.getAttribute('title')}"
-                                              description="${this.getAttribute('description')}"
-                                              postItColour="${this.getAttribute('postItColour')}"
-                                              dueDate="${this.getAttribute('dueDate')}"></task-sticker-xl>`;
+            this.innerHTML = `<task-sticker-xl 
+                                data-key="${this.getAttribute('data-key')}"
+                                title="${this.getAttribute('title')}"
+                                description="${this.getAttribute('description')}"
+                                postItColour="${this.getAttribute('postItColour')}"
+                                dueDate="${this.getAttribute('dueDate')}" 
+                                />`;
         } else {
-            this.innerHTML = `<task-sticker title="${this.getAttribute('title')}"
-                                            description="${this.getAttribute('description')}"
-                                            postItColour="${this.getAttribute('postItColour')}"
-                                            dueDate="${this.getAttribute('dueDate')}"></task-sticker>`;
+            this.innerHTML = `<task-sticker 
+                                data-key="${this.getAttribute('data-key')}"
+                                title="${this.getAttribute('title')}"
+                                description="${this.getAttribute('description')}"
+                                postItColour="${this.getAttribute('postItColour')}"
+                                dueDate="${this.getAttribute('dueDate')}" 
+                                />`;
         }
     }
 
