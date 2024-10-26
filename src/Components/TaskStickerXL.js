@@ -8,14 +8,18 @@ class TaskStickerXL extends HTMLElement {
     const description = this.getAttribute('description') || 'Please, remember to write a task description.';
     const postItColour = this.getAttribute('postItColour');
     const dueDate = this.getAttribute('dueDate') || 'No date assigned.';
+    const workarea = this.getAttribute('workarea') || ''; // Comma-separated list for selected workareas
     const modalId = `taskModal-${Math.floor(Math.random() * 10000)}`;
 
-    // Render modal content with editable inputs
-    this.render(title, description, postItColour, dueDate, modalId);
+    // Render modal content with editable inputs, including workarea checkboxes
+    this.render(title, description, postItColour, dueDate, workarea, modalId);
     this.addModalInitialization(modalId);
   }
 
-  render(title, description, postItColour, dueDate, modalId) {
+  render(title, description, postItColour, dueDate, workarea, modalId) {
+    // Split existing workarea selections into an array
+    const selectedWorkareas = workarea.split(',');
+
     this.innerHTML = `
       <style>
         .background-yellow { background-color: #fadd80; }
@@ -37,6 +41,15 @@ class TaskStickerXL extends HTMLElement {
               </div>
               <div class="mb-3">
                 <textarea class="form-control" id="editDescription-${modalId}" rows="3" placeholder="Task Description">${description}</textarea>
+              </div>
+              <div class="mb-3">
+                <label>Workarea</label>
+                <div>
+                  <label><input type="checkbox" class="workarea-option" value="Front" ${selectedWorkareas.includes('Front') ? 'checked' : ''}> Front</label><br>
+                  <label><input type="checkbox" class="workarea-option" value="Back" ${selectedWorkareas.includes('Back') ? 'checked' : ''}> Back</label><br>
+                  <label><input type="checkbox" class="workarea-option" value="Server" ${selectedWorkareas.includes('Server') ? 'checked' : ''}> Server</label><br>
+                  <label><input type="checkbox" class="workarea-option" value="Testing" ${selectedWorkareas.includes('Testing') ? 'checked' : ''}> Testing</label>
+                </div>
               </div>
             </div>
             <div class="modal-footer">
@@ -71,6 +84,7 @@ class TaskStickerXL extends HTMLElement {
     const titleInput = this.querySelector(`#editTitle-${modalId}`);
     const dueDateInput = this.querySelector(`#editDueDate-${modalId}`);
     const descriptionInput = this.querySelector(`#editDescription-${modalId}`);
+    const workareaCheckboxes = this.querySelectorAll('.workarea-option');
 
     deleteButton.addEventListener('click', () => {
       if (confirm('Are you sure you want to delete this task?')) {
@@ -97,16 +111,18 @@ class TaskStickerXL extends HTMLElement {
       const updatedTitle = titleInput.value;
       const updatedDueDate = dueDateInput.value;
       const updatedDescription = descriptionInput.value;
+
+      // Collect selected workareas
+      const selectedWorkareas = Array.from(workareaCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value)
+        .join(',');
+
       const taskKey = this.getAttribute('data-key');
 
       if (taskKey) {
         // Save updates to localStorage
-        localStorage.setItem(taskKey, JSON.stringify({
-          title: updatedTitle,
-          description: updatedDescription,
-          dueDate: updatedDueDate,
-          postItColour: this.getAttribute('postItColour')
-        }));
+        localStorage.setItem(taskKey, `${updatedTitle};${updatedDescription};${updatedDueDate};${selectedWorkareas}`);
         alert('Task updated successfully!');
         window.location.reload();
       } else {
