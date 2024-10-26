@@ -80,12 +80,22 @@ class TaskSticker extends HTMLElement {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <input type="text" class="form-control" id="editDueDate-${modalId}" placeholder="Due Date" value="${dueDate}">
-              <textarea class="form-control" id="editDescription-${modalId}" rows="3" placeholder="Task Description">${description}</textarea>
-              ${this.renderWorkareaOptions(selectedWorkareas, modalId)}
+              <div class="mb-3">
+                <input type="text" class="form-control" id="editDueDate-${modalId}" placeholder="Due Date" value="${dueDate}">
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" id="editDescription-${modalId}" rows="3" placeholder="Task Description">${description}</textarea>
+              </div>
+              <div class="mb-3">
+                <label>Workarea</label>
+                <div>
+                  ${this.getWorkareaOptions(selectedWorkareas)}
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-danger delete-task">Delete</button>
+              <button type="button" class="btn btn-outline-secondary share-task">Share</button>
               <button type="button" class="btn btn-primary save-task">Save</button>
             </div>
           </div>
@@ -94,18 +104,11 @@ class TaskSticker extends HTMLElement {
     `;
   }
 
-  renderWorkareaOptions(selectedWorkareas, modalId) {
-    return `
-      <div class="mb-3">
-        <label>Workarea:</label>
-        ${['Front', 'Back', 'Server', 'Testing'].map(area => `
-          <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input workarea-option" id="workarea${area}-${modalId}" value="${area}" ${selectedWorkareas.includes(area) ? 'checked' : ''}>
-            <label class="form-check-label" for="workarea${area}-${modalId}">${area}</label>
-          </div>
-        `).join('')}
-      </div>
-    `;
+  getWorkareaOptions(selectedWorkareas) {
+    const workareas = ['Front', 'Back', 'Server', 'Testing'];
+    return workareas.map(area => `
+      <label><input type="checkbox" class="workarea-option" value="${area}" ${selectedWorkareas.includes(area) ? 'checked' : ''}> ${area}</label><br>
+    `).join('');
   }
 
   addEventListeners(modalId, dataKey) {
@@ -117,7 +120,7 @@ class TaskSticker extends HTMLElement {
       modal.querySelector('.save-task').addEventListener('click', () => this.saveTask(dataKey, modalId));
       modal.querySelector('.delete-task').addEventListener('click', () => this.deleteTask(dataKey));
     } else {
-      console.error(`Modal element or card element not found. Modal ID: ${modalId}`);
+      console.error(`Modal or card element not found. Modal ID: ${modalId}`);
     }
   }
 
@@ -127,9 +130,7 @@ class TaskSticker extends HTMLElement {
   }
 
   saveTask(dataKey, modalId) {
-    let title = this.getValue(`#editTitle-${modalId}`);
-    console.log("Title:", title);
-
+    const title = this.getValue(`#editTitle-${modalId}`);
     const dueDate = this.getValue(`#editDueDate-${modalId}`);
     const description = this.getValue(`#editDescription-${modalId}`);
     const workarea = Array.from(this.querySelectorAll('.workarea-option'))
@@ -137,12 +138,7 @@ class TaskSticker extends HTMLElement {
       .map(checkbox => checkbox.value)
       .join(',');
 
-    const existingTask = localStorage.getItem(dataKey);
-    const [existingTitle, existingDescription, existingDueDate, existingWorkarea] = existingTask ? existingTask.split(';') : [];
-    const finalWorkarea = workarea || existingWorkarea;
-    console.log("Workarea:", finalWorkarea);
-
-    const taskData = `${title || existingTitle};${description || existingDescription};${dueDate || existingDueDate};${finalWorkarea}`;
+    const taskData = `${title};${description};${dueDate};${workarea}`;
     localStorage.setItem(dataKey, taskData);
     console.log("Task updated:", taskData);
 
