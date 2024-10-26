@@ -11,7 +11,17 @@ class TaskStickerXL extends HTMLElement {
     const modalId = `taskModal-${Math.floor(Math.random() * 10000)}`;
 
     this.render(title, description, postItColour, dueDate, modalId);
-    this.addEventListeners(modalId);
+    this.addModalInitialization(modalId);
+
+    // Use MutationObserver to detect when the modal elements are fully added to the DOM
+    const observer = new MutationObserver(() => {
+      if (this.areElementsLoaded()) {
+        this.addEventListeners(modalId);
+        observer.disconnect(); // Stop observing once elements are ready and event listeners are added
+      }
+    });
+
+    observer.observe(this, { childList: true, subtree: true });
   }
 
   render(title, description, postItColour, dueDate, modalId) {
@@ -31,7 +41,6 @@ class TaskStickerXL extends HTMLElement {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <!-- View Mode -->
               <div class="view-mode">
                 <div class="text-center">
                   <svg width="24" height="24" fill="red">
@@ -41,8 +50,7 @@ class TaskStickerXL extends HTMLElement {
                 </div>
                 <p class="description">${description}</p>
               </div>
-              
-              <!-- Edit Mode (initially hidden) -->
+
               <div class="edit-mode d-none">
                 <label for="editTitle" class="form-label">Edit Title</label>
                 <input type="text" class="form-control" id="editTitle" value="${title}">
@@ -63,7 +71,6 @@ class TaskStickerXL extends HTMLElement {
       </div>
     `;
 
-    // Initialize modal only when it exists in the DOM
     this.addModalInitialization(modalId);
   }
 
@@ -76,24 +83,73 @@ class TaskStickerXL extends HTMLElement {
       } else {
         console.error('Modal element not found for initialization.');
       }
-    }, 0); // Delay to ensure modal is in DOM
+    }, 0);
+  }
+
+  areElementsLoaded() {
+    // Check if all required elements are present in the DOM
+    return (
+      this.querySelector('.edit-task') &&
+      this.querySelector('.save-edit') &&
+      this.querySelector('.cancel-edit') &&
+      this.querySelector('.delete-task') &&
+      this.querySelector('.share-task') &&
+      this.querySelector('.view-mode') &&
+      this.querySelector('.edit-mode') &&
+      this.querySelector('.modal-title') &&
+      this.querySelector('.description')
+    );
   }
 
   addEventListeners(modalId) {
+    const editButton = this.querySelector('.edit-task');
+    const saveButton = this.querySelector('.save-edit');
+    const cancelButton = this.querySelector('.cancel-edit');
     const deleteButton = this.querySelector('.delete-task');
     const shareButton = this.querySelector('.share-task');
-    const editButton = this.querySelector('.edit-task');
-    const saveEditButton = this.querySelector('.save-edit');
-    const cancelEditButton = this.querySelector('.cancel-edit');
     const viewMode = this.querySelector('.view-mode');
     const editMode = this.querySelector('.edit-mode');
+    const titleLabel = this.querySelector('.modal-title');
+    const descriptionLabel = this.querySelector('.description');
 
-    deleteButton?.addEventListener('click', () => {
+    editButton.addEventListener('click', () => {
+      viewMode.classList.add('d-none');
+      editMode.classList.remove('d-none');
+      editButton.classList.add('d-none');
+      saveButton.classList.remove('d-none');
+      cancelButton.classList.remove('d-none');
+    });
+
+    saveButton.addEventListener('click', () => {
+      const newTitle = this.querySelector('#editTitle').value;
+      const newDescription = this.querySelector('#editDescription').value;
+
+      this.setAttribute('title', newTitle);
+      this.setAttribute('description', newDescription);
+
+      titleLabel.textContent = newTitle;
+      descriptionLabel.textContent = newDescription;
+
+      viewMode.classList.remove('d-none');
+      editMode.classList.add('d-none');
+      editButton.classList.remove('d-none');
+      saveButton.classList.add('d-none');
+      cancelButton.classList.add('d-none');
+    });
+
+    cancelButton.addEventListener('click', () => {
+      viewMode.classList.remove('d-none');
+      editMode.classList.add('d-none');
+      editButton.classList.remove('d-none');
+      saveButton.classList.add('d-none');
+      cancelButton.classList.add('d-none');
+    });
+
+    deleteButton.addEventListener('click', () => {
       if (confirm('Are you sure you want to delete this task?')) {
         const taskKey = this.getAttribute('data-key');
         if (taskKey) {
           localStorage.removeItem(taskKey);
-          console.log(`Task with key ${taskKey} deleted.`);
           document.querySelector(`#${modalId}`)?.remove();
           window.location.reload();
         } else {
@@ -102,55 +158,12 @@ class TaskStickerXL extends HTMLElement {
       }
     });
 
-    shareButton?.addEventListener('click', () => {
+    shareButton.addEventListener('click', () => {
       navigator.share({
         title: this.getAttribute('title'),
         text: this.getAttribute('description'),
         url: window.location.href,
-      }).then(() => alert('Task shared successfully!'))
-        .catch(error => alert(`Error sharing task: ${error}`));
-    });
-
-    // Edit button: switch to edit mode
-    editButton?.addEventListener('click', () => {
-      viewMode.classList.add('d-none');
-      editMode.classList.remove('d-none');
-      editButton.classList.add('d-none');
-      deleteButton.classList.add('d-none');
-      shareButton.classList.add('d-none');
-      saveEditButton.classList.remove('d-none');
-      cancelEditButton.classList.remove('d-none');
-    });
-
-    // Save Changes button: save updates and switch back to view mode
-    saveEditButton?.addEventListener('click', () => {
-      const newTitle = this.querySelector('#editTitle').value;
-      const newDescription = this.querySelector('#editDescription').value;
-
-      this.setAttribute('title', newTitle);
-      this.setAttribute('description', newDescription);
-
-      this.querySelector('.modal-title').innerText = newTitle;
-      this.querySelector('.description').innerText = newDescription;
-
-      viewMode.classList.remove('d-none');
-      editMode.classList.add('d-none');
-      editButton.classList.remove('d-none');
-      deleteButton.classList.remove('d-none');
-      shareButton.classList.remove('d-none');
-      saveEditButton.classList.add('d-none');
-      cancelEditButton.classList.add('d-none');
-    });
-
-    // Cancel button: revert to view mode without saving changes
-    cancelEditButton?.addEventListener('click', () => {
-      viewMode.classList.remove('d-none');
-      editMode.classList.add('d-none');
-      editButton.classList.remove('d-none');
-      deleteButton.classList.remove('d-none');
-      shareButton.classList.remove('d-none');
-      saveEditButton.classList.add('d-none');
-      cancelEditButton.classList.add('d-none');
+      }).catch(error => alert(`Error sharing task: ${error}`));
     });
   }
 }
