@@ -9,11 +9,9 @@ class TaskStickerXL extends HTMLElement {
     const postItColour = this.getAttribute('postItColour');
     const dueDate = this.getAttribute('dueDate') || 'No date assigned.';
     const modalId = `taskModal-${Math.floor(Math.random() * 10000)}`;
+
     this.render(title, description, postItColour, dueDate, modalId);
     this.addEventListeners(modalId);
-
-    const modal = new bootstrap.Modal(this.querySelector(`#${modalId}`));
-    modal.show();
   }
 
   render(title, description, postItColour, dueDate, modalId) {
@@ -64,6 +62,21 @@ class TaskStickerXL extends HTMLElement {
         </div>
       </div>
     `;
+
+    // Initialize modal only when it exists in the DOM
+    this.addModalInitialization(modalId);
+  }
+
+  addModalInitialization(modalId) {
+    setTimeout(() => {
+      const modalElement = this.querySelector(`#${modalId}`);
+      if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+      } else {
+        console.error('Modal element not found for initialization.');
+      }
+    }, 0); // Delay to ensure modal is in DOM
   }
 
   addEventListeners(modalId) {
@@ -75,35 +88,31 @@ class TaskStickerXL extends HTMLElement {
     const viewMode = this.querySelector('.view-mode');
     const editMode = this.querySelector('.edit-mode');
 
-    if (deleteButton) {
-      deleteButton.addEventListener('click', () => {
-        if (confirm('Are you sure you want to delete this task?')) {
-          const taskKey = this.getAttribute('data-key');
-          if (taskKey) {
-            localStorage.removeItem(taskKey);
-            console.log(`Task with key ${taskKey} deleted.`);
-            document.querySelector(`#${modalId}`).remove();
-          } else {
-            console.error('No data-key found to delete task.');
-          }
+    deleteButton?.addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete this task?')) {
+        const taskKey = this.getAttribute('data-key');
+        if (taskKey) {
+          localStorage.removeItem(taskKey);
+          console.log(`Task with key ${taskKey} deleted.`);
+          document.querySelector(`#${modalId}`)?.remove();
+          window.location.reload();
+        } else {
+          console.error('No data-key found to delete task.');
         }
-      });
-    }
+      }
+    });
 
-    if (shareButton && navigator.share) {
-      shareButton.addEventListener('click', () => {
-        navigator.share({
-          title: this.getAttribute('title'),
-          text: this.getAttribute('description'),
-          url: window.location.href,
-        })
-        .then(() => alert('Task shared successfully!'))
+    shareButton?.addEventListener('click', () => {
+      navigator.share({
+        title: this.getAttribute('title'),
+        text: this.getAttribute('description'),
+        url: window.location.href,
+      }).then(() => alert('Task shared successfully!'))
         .catch(error => alert(`Error sharing task: ${error}`));
-      });
-    }
+    });
 
     // Edit button: switch to edit mode
-    editButton.addEventListener('click', () => {
+    editButton?.addEventListener('click', () => {
       viewMode.classList.add('d-none');
       editMode.classList.remove('d-none');
       editButton.classList.add('d-none');
@@ -114,19 +123,16 @@ class TaskStickerXL extends HTMLElement {
     });
 
     // Save Changes button: save updates and switch back to view mode
-    saveEditButton.addEventListener('click', () => {
+    saveEditButton?.addEventListener('click', () => {
       const newTitle = this.querySelector('#editTitle').value;
       const newDescription = this.querySelector('#editDescription').value;
 
-      // Update component attributes
       this.setAttribute('title', newTitle);
       this.setAttribute('description', newDescription);
 
-      // Update modal title and description
       this.querySelector('.modal-title').innerText = newTitle;
       this.querySelector('.description').innerText = newDescription;
 
-      // Switch back to view mode
       viewMode.classList.remove('d-none');
       editMode.classList.add('d-none');
       editButton.classList.remove('d-none');
@@ -137,7 +143,7 @@ class TaskStickerXL extends HTMLElement {
     });
 
     // Cancel button: revert to view mode without saving changes
-    cancelEditButton.addEventListener('click', () => {
+    cancelEditButton?.addEventListener('click', () => {
       viewMode.classList.remove('d-none');
       editMode.classList.add('d-none');
       editButton.classList.remove('d-none');
