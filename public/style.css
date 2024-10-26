@@ -24,6 +24,10 @@
   font-family: "GlacialIndifference", sans-serif;
 }
 
+body {
+  overflow: hidden;  
+}
+
 .bg-gray {
   background-color: var(--gris) !important;
 }
@@ -40,6 +44,10 @@
 
 .BorderRight {
   border-right: 1px solid var(--gris);
+}
+.myprojects {
+  border-right: 1px solid var(--gris);
+  min-height: 100vh;
 }
 
 .NavItems {
@@ -82,9 +90,9 @@
   content: "\F5D4";
   font-family: bootstrap-icons!important;
   display: block;
-  position: absolute;
-  right: 0;
-  opacity: .1;
+  /*position: absolute;*/
+  left: 0;
+  opacity: 0.1;
   transition: opacity 0.3s;
   
 }
@@ -96,4 +104,104 @@
 
 li {
   list-style-type: none;
+}
+
+.task-column {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba (0, 0, 0, 0.1);
+  width: 200px;
+  min-height: 300px;
+}
+
+.task-column h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.task-column hr {
+  border-top: 2px solid #dbdbdb;
+}
+
+.btn-new-task {
+  color: #5030e5;
+}
+.btn-new-task:hover {
+  color: black;
+}
+
+.taskIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.post-it{
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba (0, 0, 0, 0.1);
+  width: 200px;
+  min-height: 300px;
+}
+
+.drag{
+  cursor: pointer;
+}
+.drag.gu-transit {
+  opacity: 0.5;
+}
+
+.drag.gu-mirror {
+  position: fixed;
+  z-index: 9999;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.placeholder {
+  background-color: #f8f9fa;
+  border: 1px dashed #dee2e6;
+  padding: 10px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.placeholder p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.overflow {
+  max-height: 58vh; /* Set a height limit for the container */
+  overflow-y: auto;  /* Enable vertical scrolling */
+}
+
+.overflow::-webkit-scrollbar {
+  display: none; 
+}
+
+.task-board {
+  display: flex;
+  justify-content: space-around; /* Makes sure columns have space */
+  flex-wrap: nowrap; /* Ensures columns don't wrap to new lines */
+  gap: 20px;
+}
+.toggle-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+.toggle-button:hover {
+  background-color: #e0e0e0;
+}
+task-sticker, task-sticker-xl {
+  transition: all 0.3s ease-in-out;
 }

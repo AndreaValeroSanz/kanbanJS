@@ -33,4 +33,5 @@ class navbar extends HTMLElement {
   }
 }
 
+// Define custom element
 customElements.define("my-navbar", navbar);
