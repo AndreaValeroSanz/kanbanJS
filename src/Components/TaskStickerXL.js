@@ -4,24 +4,15 @@ class TaskStickerXL extends HTMLElement {
   }
 
   connectedCallback() {
-    const title = this.getAttribute('title');
+    const title = this.getAttribute('title') || 'Untitled Task';
     const description = this.getAttribute('description') || 'Please, remember to write a task description.';
     const postItColour = this.getAttribute('postItColour');
     const dueDate = this.getAttribute('dueDate') || 'No date assigned.';
     const modalId = `taskModal-${Math.floor(Math.random() * 10000)}`;
 
+    // Render modal content with editable inputs
     this.render(title, description, postItColour, dueDate, modalId);
     this.addModalInitialization(modalId);
-
-    // Use MutationObserver to detect when the modal elements are fully added to the DOM
-    const observer = new MutationObserver(() => {
-      if (this.areElementsLoaded()) {
-        this.addEventListeners(modalId);
-        observer.disconnect(); // Stop observing once elements are ready and event listeners are added
-      }
-    });
-
-    observer.observe(this, { childList: true, subtree: true });
   }
 
   render(title, description, postItColour, dueDate, modalId) {
@@ -33,45 +24,32 @@ class TaskStickerXL extends HTMLElement {
         .background-green { background-color: #a6d0b3; }
       </style>
 
-      <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
+      <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content background-${postItColour}">
             <div class="modal-header">
-              <h5 class="modal-title" id="${modalId}Label">${title}</h5>
+              <input type="text" class="form-control" id="editTitle-${modalId}" placeholder="Task Title" value="${title}">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div class="view-mode">
-                <div class="text-center">
-                  <svg width="24" height="24" fill="red">
-                    <path d="M12 1.75C9.97 1.75 7.99 2.35 6.3 3.48C4.62 4.6 3.3 6.2 2.53 8.08C1.75 9.95 1.55 12 1.95 14C2.34 16 3.32 17.81 4.75 19.25C6.19 20.68 8.01 21.66 10 22.05C12 22.44 14.05 22.24 15.92 21.47C17.8 20.69 19.4 19.38 20.52 17.69C21.65 16 22.25 14.03 22.25 12C22.25 9.28 21.17 6.68 19.24 4.75C17.32 2.83 14.72 1.75 12 1.75Z"/>
-                  </svg>
-                  <span>${dueDate}</span>
-                </div>
-                <p class="description">${description}</p>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="editDueDate-${modalId}" placeholder="Due Date" value="${dueDate}">
               </div>
-
-              <div class="edit-mode d-none">
-                <label for="editTitle" class="form-label">Edit Title</label>
-                <input type="text" class="form-control" id="editTitle" value="${title}">
-                
-                <label for="editDescription" class="form-label mt-2">Edit Description</label>
-                <textarea class="form-control" id="editDescription" rows="3">${description}</textarea>
+              <div class="mb-3">
+                <textarea class="form-control" id="editDescription-${modalId}" rows="3" placeholder="Task Description">${description}</textarea>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-primary edit-task">Edit</button>
               <button type="button" class="btn btn-outline-danger delete-task">Delete</button>
               <button type="button" class="btn btn-outline-secondary share-task">Share</button>
-              <button type="button" class="btn btn-primary d-none save-edit">Save Changes</button>
-              <button type="button" class="btn btn-secondary d-none cancel-edit">Cancel</button>
+              <button type="button" class="btn btn-primary save-task">Save</button>
             </div>
           </div>
         </div>
       </div>
     `;
 
-    this.addModalInitialization(modalId);
+    this.addEventListeners(modalId);
   }
 
   addModalInitialization(modalId) {
@@ -86,64 +64,13 @@ class TaskStickerXL extends HTMLElement {
     }, 0);
   }
 
-  areElementsLoaded() {
-    // Check if all required elements are present in the DOM
-    return (
-      this.querySelector('.edit-task') &&
-      this.querySelector('.save-edit') &&
-      this.querySelector('.cancel-edit') &&
-      this.querySelector('.delete-task') &&
-      this.querySelector('.share-task') &&
-      this.querySelector('.view-mode') &&
-      this.querySelector('.edit-mode') &&
-      this.querySelector('.modal-title') &&
-      this.querySelector('.description')
-    );
-  }
-
   addEventListeners(modalId) {
-    const editButton = this.querySelector('.edit-task');
-    const saveButton = this.querySelector('.save-edit');
-    const cancelButton = this.querySelector('.cancel-edit');
     const deleteButton = this.querySelector('.delete-task');
     const shareButton = this.querySelector('.share-task');
-    const viewMode = this.querySelector('.view-mode');
-    const editMode = this.querySelector('.edit-mode');
-    const titleLabel = this.querySelector('.modal-title');
-    const descriptionLabel = this.querySelector('.description');
-
-    editButton.addEventListener('click', () => {
-      viewMode.classList.add('d-none');
-      editMode.classList.remove('d-none');
-      editButton.classList.add('d-none');
-      saveButton.classList.remove('d-none');
-      cancelButton.classList.remove('d-none');
-    });
-
-    saveButton.addEventListener('click', () => {
-      const newTitle = this.querySelector('#editTitle').value;
-      const newDescription = this.querySelector('#editDescription').value;
-
-      this.setAttribute('title', newTitle);
-      this.setAttribute('description', newDescription);
-
-      titleLabel.textContent = newTitle;
-      descriptionLabel.textContent = newDescription;
-
-      viewMode.classList.remove('d-none');
-      editMode.classList.add('d-none');
-      editButton.classList.remove('d-none');
-      saveButton.classList.add('d-none');
-      cancelButton.classList.add('d-none');
-    });
-
-    cancelButton.addEventListener('click', () => {
-      viewMode.classList.remove('d-none');
-      editMode.classList.add('d-none');
-      editButton.classList.remove('d-none');
-      saveButton.classList.add('d-none');
-      cancelButton.classList.add('d-none');
-    });
+    const saveButton = this.querySelector('.save-task');
+    const titleInput = this.querySelector(`#editTitle-${modalId}`);
+    const dueDateInput = this.querySelector(`#editDueDate-${modalId}`);
+    const descriptionInput = this.querySelector(`#editDescription-${modalId}`);
 
     deleteButton.addEventListener('click', () => {
       if (confirm('Are you sure you want to delete this task?')) {
@@ -160,10 +87,31 @@ class TaskStickerXL extends HTMLElement {
 
     shareButton.addEventListener('click', () => {
       navigator.share({
-        title: this.getAttribute('title'),
-        text: this.getAttribute('description'),
+        title: titleInput.value,
+        text: descriptionInput.value,
         url: window.location.href,
       }).catch(error => alert(`Error sharing task: ${error}`));
+    });
+
+    saveButton.addEventListener('click', () => {
+      const updatedTitle = titleInput.value;
+      const updatedDueDate = dueDateInput.value;
+      const updatedDescription = descriptionInput.value;
+      const taskKey = this.getAttribute('data-key');
+
+      if (taskKey) {
+        // Save updates to localStorage
+        localStorage.setItem(taskKey, JSON.stringify({
+          title: updatedTitle,
+          description: updatedDescription,
+          dueDate: updatedDueDate,
+          postItColour: this.getAttribute('postItColour')
+        }));
+        alert('Task updated successfully!');
+        window.location.reload();
+      } else {
+        console.error('No data-key found to save task.');
+      }
     });
   }
 }
